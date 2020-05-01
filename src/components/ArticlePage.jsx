@@ -5,7 +5,10 @@ import CommentList from './CommentList'
 
 class ArticlePage extends Component {
   state = {
-    articles: [], isLoading: true
+    article: {}, isLoading: true
+  }
+  componentDidMount() {
+
   }
 
 

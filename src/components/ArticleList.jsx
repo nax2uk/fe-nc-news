@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { Link } from '@reach/router'
+import * as api from '../utils/api'
 
 
 class ArticleList extends Component {
@@ -19,15 +20,10 @@ class ArticleList extends Component {
     }
   }
 
-  fetchArticles = ({ sort_by, topic }) => {
-    axios
-      .get('https://nc--news-server.herokuapp.com/api/articles', {
-        params: {
-          sort_by: sort_by,
-          topic: topic
-        }
-      })
-      .then(({ data: { articles } }) => {
+  fetchArticles = (params) => {
+    api
+      .getArticles(params)
+      .then(articles => {
         this.setState({ articles: articles, isLoading: false })
       })
   }
@@ -38,10 +34,11 @@ class ArticleList extends Component {
       <ul>
         {articles.map(article => {
           return (
-            <li key={`${article.article_id}`}>
+            <Link key={`${article.article_id}`} to={`/articles/${article.articl_id}`}>
               <h2>{`${article.title}`}</h2>
               <p>{`${article.author}`}</p>
-            </li>);
+              <p>{`${article.topic}`}</p>
+            </Link>);
         })}
       </ul>);
   }
