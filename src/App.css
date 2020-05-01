@@ -1,38 +1,63 @@
-.App {
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: #fff;
+  padding: 0 16px;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.app{
+  text-align:center;
+  display:grid;
+  grid-template-columns: auto 1000px auto;
+  grid-template-rows:50px 50px auto 50px;
+  grid-template-areas:
+  "top top top"
+  "leftCol nav rightCol"
+  "leftCol mainContent rightCol"
+  "footer footer footer"
+}
+
+header{
+  grid-area: top;
+width:100%;
+  background-color: #AB2D2D;
+
+
+}
+.left-column{
+  grid-area:leftColumn;
+  background-color: aqua;
+}
+.right-column{
+  grid-area:rightColumn;
+  background-color: purple;
+}
+
+nav {
+  grid-area: nav;
+
   text-align: center;
+  background-color: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+main {
+  text-align: left;
+  font-size: 16px;
+  grid-area: mainContent;
+  background-color:green;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+footer {
+  grid-area: footer;
+  font-family: Montserrat;
+  background-color: yellow;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
