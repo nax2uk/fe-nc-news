@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 import * as api from '../utils/api'
 
 
@@ -17,16 +17,24 @@ class NavMenu extends Component {
     const { topics } = this.state;
     return (
       <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark">
-        <Link to='/' className="navbar-brand">Northcoders</Link>
-        <ul className=" navbar-nav ml-auto">
-          {topics.map(topic => {
-            return (
-              <li className="nav-item" key={`${topic.slug}`}>
-                <Link to={`/topic/${topic.slug}`} className="nav-link">{`${topic.slug}`}</Link>
-              </li>);
-          })
-          }
-        </ul>
+        <Link to='/' className="navbar-brand">Northcoders News</Link>
+
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerMenu"
+          aria-controls="navbarTogglerMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarTogglerMenu">
+          <ul className=" navbar-nav ml-auto" >
+            {topics.map(topic => {
+              return (
+                <li key={`${topic.slug}`} className="nav-item" >
+                  <Link to={`/topic/${topic.slug}`} className="nav-link text-capitalize">{`${topic.slug}`}</Link>
+                </li>);
+            })
+            }
+          </ul>
+        </div>
       </nav>
     );
   }

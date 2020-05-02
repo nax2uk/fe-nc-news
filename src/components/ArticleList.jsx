@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 import * as api from '../utils/api'
 import Loader from './Loader'
+import SortForm from './SortForm'
+import './ArticleList.css'
 
 
 class ArticleList extends Component {
-  state = { articles: [] }
+  state = { articles: [], isLoading: true, params: { sort_by: "created_at", order: "desc" } }
 
   componentDidMount() {
-    console.log(this.props)
-    if (this.props.path === '/') this.fetchArticles({ sort_by: "votes" })
-    else if (this.props.slug) {
-      this.fetchArticles({ topic: this.props.slug })
+    if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes" })
+    else if (this.props.match.params.slug) {
+      this.fetchArticles({ topic: this.props.match.params.slug })
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.slug !== this.props.slug) {
-      this.fetchArticles({ topic: this.props.slug });
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
+      this.fetchArticles({ topic: this.props.match.params.slug });
     }
   }
 
@@ -25,25 +26,52 @@ class ArticleList extends Component {
     api
       .getArticles(params)
       .then(articles => {
+
         this.setState({ articles: articles, isLoading: false })
       })
+  }
+
+  sortArticles = (params) => {
+    this.setState({ isLoading: true });
+    api
+      .getSortedArticles(params)
+      .then(articles => {
+        this.setState({ params: params, articles: articles, isLoading: false });
+      })
+
   }
 
   render() {
     if (this.state.isLoading) return <Loader />;
     else {
-      const { articles } = this.state;
+      const { articles, params } = this.state;
       return (
-        <ul>
-          {articles.map(article => {
-            return (
-              <Link key={`${article.article_id}`} to={`/articles/${article.article_id}`}>
-                <h2>{`${article.title}`}</h2>
-                <p>{`${article.author}`}</p>
-                <p>{`${article.topic}`}</p>
-              </Link>);
-          })}
-        </ul>);
+        <section id="articles">
+          {this.props.match.params.slug && <SortForm sortArticles={this.sortArticles} topic={this.props.match.params.slug} params={params} />}
+          <div className="card">
+            <ul className=" list-group list-group-flush">
+              {articles.map(article => {
+                return (
+                  <li className="list-group-item" key={`${article.article_id}`}>
+                    <Link to={`/articles/${article.article_id}`} >
+                      <h5>{`${article.title}`}</h5> </Link>
+                    <p className="text-capitalize small">in <Link to={`topics/${article.topic}`}>{`${article.topic}`}</Link>
+                      <span className="text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
+                    </p>
+                    <div className="small">
+                      <button type="button" className="btn btn-light">
+                        <i className="icon fas fa-comment-alt"></i><a href="/" className="small"> {`${article.comment_count} comments`} </a>
+                      </button>
+                      <button type="button" className="btn btn-light">
+                        <i className="icon fas fa-vote-yea"></i> <a href="/" className="small">{`${article.votes} votes`}
+                        </a></button>
+                    </div>
+
+                  </li>);
+              })}
+            </ul>
+          </div>
+        </section>);
     }
   }
 }

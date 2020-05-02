@@ -8,7 +8,7 @@ const CommentList = (props) => {
     <div>
       {comments.map(comment => {
         return (
-          <div>
+          <div key={`${comment.comment_id}`}>
             <h3>{`${comment.author}`}</h3>
             <p>{`${comment.created_at}`}</p>
             <p>{`${comment.body}`}</p>

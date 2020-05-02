@@ -1,0 +1,21 @@
+.small a {
+color: #888888;
+font-weight: bold;
+}
+
+.card ul li h5{
+  color:#000;
+}
+
+.card ul li a:hover{
+  text-decoration: none;
+}
+
+.card ul li p a:hover{
+  text-decoration: underline;
+}
+
+.icon{
+  color: #888888;
+  padding-left:2px;
+}

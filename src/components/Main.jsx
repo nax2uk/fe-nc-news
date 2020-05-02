@@ -1,16 +1,18 @@
 import React from 'react';
-import { Router } from '@reach/router'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import ArticleList from './ArticleList'
 import ArticlePage from './ArticlePage'
 
 const Main = () => {
   return (
     <main>
-      <Router>
-        <ArticleList path='/' />
-        <ArticleList path='/topic/:slug' />
-        <ArticlePage path='/articles/:article_id' />
-      </Router>
+      <BrowserRouter>
+        <Switch>
+          <Route path='/' exact component={ArticleList} />
+          <Route path='/topic/:slug' component={ArticleList} />
+          <Route path='/articles/:article_id' component={ArticlePage} />
+        </Switch>
+      </BrowserRouter>
     </main>
   );
 };

@@ -39,5 +39,18 @@ export const getComments = (article_id) => {
 
 }
 
-export const updateVotes
+export const getSortedArticles = ({ sort_by, order, topic }) => {
+  return axios
+    .get(`https://nc--news-server.herokuapp.com/api/articles`, {
+      params: {
+        sort_by: sort_by,
+        order: order,
+        topic: topic
+      }
+    })
+    .then(({ data: { articles } }) => {
+      console.log(articles);
+      return articles;
+    })
 
+}

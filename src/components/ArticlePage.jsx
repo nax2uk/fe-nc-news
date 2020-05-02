@@ -13,7 +13,8 @@ class ArticlePage extends Component {
   }
 
   componentDidMount() {
-    const { article_id } = this.props;
+
+    const { article_id } = this.props.match.params;
     api
       .getComments(article_id)
       .then(comments => {
