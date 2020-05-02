@@ -22,3 +22,22 @@ export const getArticles = ({ sort_by, topic }) => {
 
 }
 
+export const getArticleById = (article_id) => {
+  return axios
+    .get(`https://nc--news-server.herokuapp.com/api/articles/${article_id}`)
+    .then(({ data: { article } }) => {
+      return article;
+    })
+}
+
+export const getComments = (article_id) => {
+  return axios
+    .get(`https://nc--news-server.herokuapp.com/api/articles/${article_id}/comments`)
+    .then(({ data: { comments } }) => {
+      return comments;
+    })
+
+}
+
+export const updateVotes
+

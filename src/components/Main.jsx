@@ -2,7 +2,6 @@ import React from 'react';
 import { Router } from '@reach/router'
 import ArticleList from './ArticleList'
 import ArticlePage from './ArticlePage'
-import HomePage from './HomePage'
 
 const Main = () => {
   return (

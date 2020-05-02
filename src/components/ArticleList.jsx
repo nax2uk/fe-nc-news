@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router'
 import * as api from '../utils/api'
+import Loader from './Loader'
 
 
 class ArticleList extends Component {
@@ -29,18 +30,21 @@ class ArticleList extends Component {
   }
 
   render() {
-    const { articles } = this.state;
-    return (
-      <ul>
-        {articles.map(article => {
-          return (
-            <Link key={`${article.article_id}`} to={`/articles/${article.articl_id}`}>
-              <h2>{`${article.title}`}</h2>
-              <p>{`${article.author}`}</p>
-              <p>{`${article.topic}`}</p>
-            </Link>);
-        })}
-      </ul>);
+    if (this.state.isLoading) return <Loader />;
+    else {
+      const { articles } = this.state;
+      return (
+        <ul>
+          {articles.map(article => {
+            return (
+              <Link key={`${article.article_id}`} to={`/articles/${article.article_id}`}>
+                <h2>{`${article.title}`}</h2>
+                <p>{`${article.author}`}</p>
+                <p>{`${article.topic}`}</p>
+              </Link>);
+          })}
+        </ul>);
+    }
   }
 }
 
