@@ -49,7 +49,11 @@ export const getSortedArticles = ({ sort_by, order, topic }) => {
       }
     })
     .then(({ data: { articles } }) => {
-      console.log(articles);
+      console.log({
+        sort_by: sort_by,
+        order: order,
+        topic: topic
+      })
       return articles;
     })
 

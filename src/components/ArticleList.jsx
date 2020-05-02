@@ -7,7 +7,7 @@ import './ArticleList.css'
 
 
 class ArticleList extends Component {
-  state = { articles: [], isLoading: true, params: { sort_by: "created_at", order: "desc" } }
+  state = { articles: [], isLoading: true, sort_by: "created_at", order: "desc" }
 
   componentDidMount() {
     if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes" })
@@ -27,7 +27,7 @@ class ArticleList extends Component {
       .getArticles(params)
       .then(articles => {
 
-        this.setState({ articles: articles, isLoading: false })
+        this.setState({ sort_by: "created_at", order: "desc", articles: articles, isLoading: false })
       })
   }
 
@@ -36,18 +36,27 @@ class ArticleList extends Component {
     api
       .getSortedArticles(params)
       .then(articles => {
-        this.setState({ params: params, articles: articles, isLoading: false });
-      })
-
+        console.log(params);
+        const { sort_by, order } = params;
+        if (sort_by !== this.state.sort_by) {
+          this.setState({ sort_by: sort_by, order: "desc", articles: articles, isLoading: false })
+        }
+        else {
+          this.setState({ sort_by: sort_by, order: order, articles: articles, isLoading: false })
+        }
+      });
   }
 
   render() {
     if (this.state.isLoading) return <Loader />;
     else {
-      const { articles, params } = this.state;
+
+      const { articles, sort_by, order } = this.state;
+      console.log(sort_by);
+      console.log(order);
       return (
         <section id="articles">
-          {this.props.match.params.slug && <SortForm sortArticles={this.sortArticles} topic={this.props.match.params.slug} params={params} />}
+          {this.props.match.params.slug && <SortForm sortArticles={this.sortArticles} topic={this.props.match.params.slug} sort_by={sort_by} order={order} />}
           <div className="card">
             <ul className=" list-group list-group-flush">
               {articles.map(article => {
@@ -55,7 +64,7 @@ class ArticleList extends Component {
                   <li className="list-group-item" key={`${article.article_id}`}>
                     <Link to={`/articles/${article.article_id}`} >
                       <h5>{`${article.title}`}</h5> </Link>
-                    <p className="text-capitalize small">in <Link to={`topics/${article.topic}`}>{`${article.topic}`}</Link>
+                    <p className="text-capitalize small">in <Link to={`/topics/${article.topic}`}>{`${article.topic}`}</Link>
                       <span className="text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
                     </p>
                     <div className="small">
