@@ -66,3 +66,26 @@ export const getUser = (user) => {
       return user;
     })
 }
+
+export const updateArticleVotes = (article_id, voteChange) => {
+
+  return axios
+    .patch(`https://nc--news-server.herokuapp.com/api/articles/${article_id}`, { inc_votes: voteChange })
+}
+
+export const postComment = (article_id, username, body) => {
+  return axios
+    .post(`https://nc--news-server.herokuapp.com/api/articles/${article_id}/comments`, {
+      username: username,
+      body: body
+    })
+    .then(({ data: { comment } }) => {
+      console.log(comment)
+      return comment;
+    })
+}
+
+export const deleteComment = (comment_id) => {
+  return axios
+    .delete(`https://nc--news-server.herokuapp.com/api/comments/${comment_id}`);
+}

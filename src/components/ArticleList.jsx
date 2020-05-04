@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import * as api from '../utils/api'
 import Loader from './Loader'
 import SortForm from './SortForm'
+import ArticleCard from './ArticleCard'
 import './ArticleList.css'
 
 
@@ -62,32 +62,8 @@ class ArticleList extends Component {
                 <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
               </div>
             </div>}
-
-          <div className="card">
-            <ul className=" list-group list-group-flush">
-              {articles.map(article => {
-                return (
-                  <li className="list-group-item" key={`${article.article_id}`}>
-                    <Link to={`/articles/${article.article_id}`} >
-                      <h5 className="card-title">{`${article.title}`}</h5> </Link>
-                    <p className="text-capitalize card-subtitle text-muted small">in <Link to={`/topics/${article.topic}`}>{`${article.topic}`}</Link>
-                      <span className="card-subtitle text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
-                    </p>
-                    <div className="small">
-                      <button type="button" className="btn btn-light">
-                        <i className="icon fas fa-comment-alt"></i><a href="/" className="small"> {`${article.comment_count} comments`} </a>
-                      </button>
-                      <button type="button" className="btn btn-light">
-                        <i className="icon fas fa-vote-yea"></i> <a href="/" className="small">{`${article.votes} votes`}
-                        </a></button>
-                    </div>
-
-                  </li>);
-              })}
-            </ul>
-          </div>
-
-        </section >);
+          <ArticleCard articles={articles} />
+        </section>);
     }
   }
 }

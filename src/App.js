@@ -23,9 +23,9 @@ class App extends Component {
         .then(user => {
           this.setState({ avatar_url: user.avatar_url, name: user.name })
         })
-        .catch(err => {
-          console.dir(err);
-        })
+        .catch(() =>
+          this.setState({ username: "" })
+        )
     })
   }
 

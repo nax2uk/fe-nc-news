@@ -4,7 +4,3 @@ nav img {
   border-radius: 8px;
   border-color: #000;
 }
-
-nav a .nav-item:hover{
-text-decoration:underline;
-}
