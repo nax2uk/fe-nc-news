@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("in mount")
+
     this.setState((currState) => {
       const { username } = currState;
       api.getUser(username)
@@ -31,7 +31,7 @@ class App extends Component {
 
   render() {
     const { name, avatar_url, username } = this.state;
-    console.log(avatar_url)
+
     return (
       <BrowserRouter>
         <NavMenu />
@@ -39,7 +39,7 @@ class App extends Component {
         <Switch>
           <Route path='/' exact component={ArticleList} />
           <Route path='/topic/:slug' component={ArticleList} />
-          <Route path='/articles/:article_id' component={ArticlePage} />
+          <Route path='/articles/:article_id' render={(props) => <ArticlePage {...props} username={username} />} />
         </Switch>
         <Footer />
       </BrowserRouter>

@@ -30,13 +30,14 @@ class ArticlePage extends Component {
 
 
   render() {
+    const { username } = this.props;
     if (this.state.isLoading) return <Loader />;
     else {
       const { article, comments } = this.state;
       return (
-        <div>
+        <div className="card mt-4">
           <SingleArticle article={article} />
-          <PostCommentForm />
+          <PostCommentForm username={username} />
           <CommentList comments={comments} />
         </div>
       );

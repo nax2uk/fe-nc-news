@@ -56,7 +56,7 @@ class ArticleList extends Component {
       return (
         <section id="articles">
           {slug &&
-            <div className="card">
+            <div className="card mt-4">
               <div className="card-body text-capitalize">
                 <h4 className="float-left pl-2 pt-1">{`${slug}`}</h4>
                 <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
