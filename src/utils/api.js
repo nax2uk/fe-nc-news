@@ -58,3 +58,11 @@ export const getSortedArticles = ({ sort_by, order, topic }) => {
     })
 
 }
+
+export const getUser = (user) => {
+  return axios
+    .get(`https://nc--news-server.herokuapp.com/api/users/${user}`)
+    .then(({ data: { user } }) => {
+      return user;
+    })
+}

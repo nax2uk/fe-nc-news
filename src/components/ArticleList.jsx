@@ -52,20 +52,26 @@ class ArticleList extends Component {
     else {
 
       const { articles, sort_by, order } = this.state;
-      console.log(sort_by);
-      console.log(order);
+      const { slug } = this.props.match.params;
       return (
         <section id="articles">
-          {this.props.match.params.slug && <SortForm sortArticles={this.sortArticles} topic={this.props.match.params.slug} sort_by={sort_by} order={order} />}
+          {slug &&
+            <div className="card">
+              <div className="card-body text-capitalize">
+                <h4 className="float-left pl-2 pt-1">{`${slug}`}</h4>
+                <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
+              </div>
+            </div>}
+
           <div className="card">
             <ul className=" list-group list-group-flush">
               {articles.map(article => {
                 return (
                   <li className="list-group-item" key={`${article.article_id}`}>
                     <Link to={`/articles/${article.article_id}`} >
-                      <h5>{`${article.title}`}</h5> </Link>
-                    <p className="text-capitalize small">in <Link to={`/topics/${article.topic}`}>{`${article.topic}`}</Link>
-                      <span className="text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
+                      <h5 className="card-title">{`${article.title}`}</h5> </Link>
+                    <p className="text-capitalize card-subtitle text-muted small">in <Link to={`/topics/${article.topic}`}>{`${article.topic}`}</Link>
+                      <span className="card-subtitle text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
                     </p>
                     <div className="small">
                       <button type="button" className="btn btn-light">
@@ -80,7 +86,8 @@ class ArticleList extends Component {
               })}
             </ul>
           </div>
-        </section>);
+
+        </section >);
     }
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Votes from './Votes'
 
 const CommentList = (props) => {
   const { comments } = props;
@@ -12,7 +11,6 @@ const CommentList = (props) => {
             <h3>{`${comment.author}`}</h3>
             <p>{`${comment.created_at}`}</p>
             <p>{`${comment.body}`}</p>
-            <Votes votes={`${comment.votes}`} />
           </div>);
       })}
     </div>

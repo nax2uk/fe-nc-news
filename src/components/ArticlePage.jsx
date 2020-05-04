@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SingleArticle from './SingleArticle'
 import CommentList from './CommentList'
 import Loader from './Loader'
+import PostCommentForm from './PostCommentForm'
 import * as api from '../utils/api'
 
 
@@ -35,6 +36,7 @@ class ArticlePage extends Component {
       return (
         <div>
           <SingleArticle article={article} />
+          <PostCommentForm />
           <CommentList comments={comments} />
         </div>
       );
