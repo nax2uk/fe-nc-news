@@ -100,11 +100,11 @@ class ArticlePage extends Component {
 
           <p className="card-text mx-4 my-2">{`${article.body}`}</p>
 
-          <div className="small mb-0 ml-4 float-left">
+          <div className="small mb-0 ml-4">
             <span className="votes ml-2"><i className="icon fas fa-comment-alt ml-3"></i> {`${article.comment_count} comments`} </span>
             <span className="ml-2"><VoteUpdater id={article.article_id} dir="articles" votes={article.votes} /></span>
           </div>
-          <button type="button" className="btn btn-secondary custom-btn btn-sm small float-right  mr-5 mt-1" onClick={this.togglePostCommentClick}>Post Comment</button>
+          <button type="button" className="btn btn-secondary custom-btn btn-sm small ml-3 mt-1" onClick={this.togglePostCommentClick}>Post Comment</button>
 
           {postCommentIsClicked && <PostCommentForm username={username} article_id={article.article_id} addComment={this.addComment} />}
         </div>

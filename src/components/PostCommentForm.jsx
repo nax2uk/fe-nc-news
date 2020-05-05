@@ -33,7 +33,7 @@ class PostCommentForm extends Component {
                 <button className="btn btn-outline-secondary btn-sm small ml-2 mt-2" onClick={this.submitComment} disabled={isNotFilled} > Comment</button>
               </div>
             </div>
-          </form> : <div className="container-fluid"><p className="m-0 p-0">You can't post a comment because you are not logged in.</p></div>
+          </form> : <p className="mt-3 ml-4">You can't post a comment because you are not logged in.</p>
       }
     </React.Fragment>);
   };
