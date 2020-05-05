@@ -1,5 +1,4 @@
 import React from 'react';
-import './SortForm.css';
 
 const SortForm = (props) => {
 

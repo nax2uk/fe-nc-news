@@ -12,6 +12,9 @@ body {
   border-color: #888888;
   outline:none;
 }
+.custom-select{
+  width:150px;;
+}
 
 .btn-secondary.custom-btn:hover {
 	background-color: #676767;
@@ -60,4 +63,11 @@ font-weight: bold;
 .card-body{
   padding:5px;
   margin: 5px;
+}
+
+nav img {
+  width:25px;
+  height:25px;
+  border-radius: 8px;
+  border-color: #000;
 }

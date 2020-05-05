@@ -3,21 +3,30 @@ import * as api from '../utils/api'
 import Loader from './Loader'
 import SortForm from './SortForm'
 import ArticleCard from './ArticleCard'
+import ErrorPage from './ErrorPage'
 
 
 class ArticleList extends Component {
-  state = { articles: [], isLoading: true, sort_by: "created_at", order: "desc" }
+  state = { articles: [], isLoading: true, sort_by: "created_at", order: "desc", err: "" }
 
   componentDidMount() {
-    if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes" })
+    console.log("in mount")
+    if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes", limit: 5 })
     else if (this.props.match.params.slug) {
       this.fetchArticles({ topic: this.props.match.params.slug })
     }
   }
 
   componentDidUpdate(prevProps) {
+    console.log("in update")
+    console.log(prevProps.match.path !== this.props.match.path)
+
     if (prevProps.match.params.slug !== this.props.match.params.slug) {
       this.fetchArticles({ topic: this.props.match.params.slug });
+    }
+    if (prevProps.match.path !== this.props.match.path) {
+      if (this.props.match.path === "/")
+        this.fetchArticles({ sort_by: "votes", limit: 5 });
     }
   }
 
@@ -27,6 +36,10 @@ class ArticleList extends Component {
       .then(articles => {
 
         this.setState({ sort_by: "created_at", order: "desc", articles: articles, isLoading: false })
+      })
+      .catch(err => {
+        console.dir(err);
+        this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
       })
   }
 
@@ -47,20 +60,26 @@ class ArticleList extends Component {
   }
 
   render() {
+    console.log("render")
+    const { err } = this.state;
     if (this.state.isLoading) return <Loader />;
+    else if (err) return <ErrorPage err={err} />;
     else {
 
       const { articles, sort_by, order } = this.state;
       const { slug } = this.props.match.params;
       return (
         <section id="articles">
-          {slug &&
-            <div className="card mt-4">
-              <div className="card-body text-capitalize">
-                <h4 className="float-left pl-2 pt-1">{`${slug}`}</h4>
-                <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
-              </div>
-            </div>}
+          <div className="card mt-4">
+            <div className="card-body text-capitalize">
+              {slug ?
+                <React.Fragment>
+                  <h4 className="float-left pl-2 pt-1">{`${slug}`}</h4>
+                  <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
+                </React.Fragment>
+                : <h4 className="float-left pl-2 pt-1">Top 5 Recently Posted Articles</h4>}
+            </div>
+          </div>
           <ArticleCard articles={articles} />
         </section>);
     }

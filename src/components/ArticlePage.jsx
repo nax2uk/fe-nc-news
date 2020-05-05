@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import CommentList from './CommentList'
 import VoteUpdater from './VoteUpdater'
 import PostCommentForm from './PostCommentForm'
+import ErrorPage from './ErrorPage'
 import Loader from './Loader'
 import * as api from '../utils/api'
 
@@ -12,7 +13,8 @@ class ArticlePage extends Component {
     article: {},
     comments: [],
     isLoading: true,
-    postCommentIsClicked: false
+    postCommentIsClicked: false,
+    err: ""
   }
 
   togglePostCommentClick = () => {
@@ -32,6 +34,9 @@ class ArticlePage extends Component {
           return { comments: [comment, ...currState.comments], article: newArticle, postCommentIsClicked: false }
         })
       })
+      .catch(err => {
+        this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
+      })
 
   }
 
@@ -45,6 +50,9 @@ class ArticlePage extends Component {
           return { comments: currState.comments.filter(comment => comment.comment_id !== comment_id), article: newArticle }
         })
       })
+      .catch(err => {
+        this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
+      })
   }
 
   componentDidMount() {
@@ -54,16 +62,27 @@ class ArticlePage extends Component {
       .then(comments => {
         this.setState({ comments: comments, isLoading: false })
       })
+      .catch(err => {
+        this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
+      })
+
     api
       .getArticleById(article_id)
       .then(article => {
         this.setState({ article });
       })
+      .catch(err => {
+
+        this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
+      })
   }
 
   render() {
     const { username } = this.props;
+    const { err } = this.state;
+
     if (this.state.isLoading) return <Loader />;
+    else if (err) return <ErrorPage err={err} />
     else {
       const { article, comments, postCommentIsClicked } = this.state;
 

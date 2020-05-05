@@ -4,7 +4,6 @@ import VoteUpdater from './VoteUpdater'
 
 const ArticleCard = (props) => {
   const { articles } = props;
-  console.log(`/topics/${articles[0].topic}`)
   return (
     <div className="card">
       <ul className=" list-group list-group-flush">

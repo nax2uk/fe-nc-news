@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Dashboard from './components/Dashboard'
 import ArticleList from './components/ArticleList'
 import ArticlePage from './components/ArticlePage'
+import ErrorPage from './components/ErrorPage'
 import * as api from './utils/api'
 import './App.css';
 
@@ -23,9 +24,9 @@ class App extends Component {
         .then(user => {
           this.setState({ avatar_url: user.avatar_url, name: user.name })
         })
-        .catch(() =>
-          this.setState({ username: "" })
-        )
+        .catch(() => {
+          this.setState({ username: "" });
+        })
     })
   }
 
@@ -38,8 +39,9 @@ class App extends Component {
         <Dashboard name={name} avatar_url={avatar_url} username={username} />
         <Switch>
           <Route path='/' exact component={ArticleList} />
-          <Route path='/topic/:slug' component={ArticleList} />
-          <Route path='/articles/:article_id' render={(props) => <ArticlePage {...props} username={username} />} />
+          <Route path='/topic/:slug' exact component={ArticleList} />
+          <Route path='/articles/:article_id' exact render={(props) => <ArticlePage {...props} username={username} />} />
+          <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer />
       </BrowserRouter>

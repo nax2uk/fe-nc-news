@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 class PostCommentForm extends Component {
-  state = { body: "" }
+  state = { body: "", isNotFilled: true }
 
   handleChange = (event) => {
-    this.setState({ body: event.target.value })
+    const { value } = event.target;
+
+    this.setState({ body: event.target.value, isNotFilled: (value) ? false : true })
   }
 
   submitComment = (event) => {
@@ -18,19 +20,20 @@ class PostCommentForm extends Component {
 
   render() {
     const { username } = this.props;
-    const { body } = this.state;
+    const { body, isNotFilled } = this.state;
+
     return (<React.Fragment>
       {
-        (username === "") ? <p className="ml-2">You can't post a comment because you are not logged in.</p> :
+        (username) ?
           <form>
             <div className="form-group container-fluid mt-5">
-              <label class="small">{`Post Comment as ${username}`} </label>
-              <textarea className="form-control" rows="3" onChange={this.handleChange} value={body}></textarea>
+              <label className="small">{`Post Comment as ${username}`} </label>
+              <textarea className="form-control" rows="3" onChange={this.handleChange} value={body} placeholder="Your comment goes here." />
               <div className="text-right">
-                <button className="btn btn-outline-secondary btn-sm small ml-2 mt-2" onClick={this.submitComment}>Comment</button>
+                <button className="btn btn-outline-secondary btn-sm small ml-2 mt-2" onClick={this.submitComment} disabled={isNotFilled} > Comment</button>
               </div>
             </div>
-          </form>
+          </form> : <div className="container-fluid"><p className="m-0 p-0">You can't post a comment because you are not logged in.</p></div>
       }
     </React.Fragment>);
   };
