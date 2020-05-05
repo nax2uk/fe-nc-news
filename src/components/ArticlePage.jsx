@@ -63,6 +63,7 @@ class ArticlePage extends Component {
         this.setState({ comments: comments, isLoading: false })
       })
       .catch(err => {
+        console.dir(err);
         this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
       })
 
@@ -81,6 +82,7 @@ class ArticlePage extends Component {
     const { username } = this.props;
     const { err } = this.state;
 
+    console.log(err)
     if (this.state.isLoading) return <Loader />;
     else if (err) return <ErrorPage err={err} />
     else {

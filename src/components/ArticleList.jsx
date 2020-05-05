@@ -11,17 +11,20 @@ class ArticleList extends Component {
 
   componentDidMount() {
     console.log("in mount")
+
     if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes", limit: 5 })
     else if (this.props.match.params.slug) {
       this.fetchArticles({ topic: this.props.match.params.slug })
+
     }
   }
 
   componentDidUpdate(prevProps) {
-    console.log("in update")
+
     console.log(prevProps.match.path !== this.props.match.path)
 
     if (prevProps.match.params.slug !== this.props.match.params.slug) {
+
       this.fetchArticles({ topic: this.props.match.params.slug });
     }
     if (prevProps.match.path !== this.props.match.path) {
@@ -34,11 +37,9 @@ class ArticleList extends Component {
     api
       .getArticles(params)
       .then(articles => {
-
         this.setState({ sort_by: "created_at", order: "desc", articles: articles, isLoading: false })
       })
       .catch(err => {
-        console.dir(err);
         this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
       })
   }
@@ -59,8 +60,20 @@ class ArticleList extends Component {
       });
   }
 
+  getTotalArticles = () => {
+    api
+      .getArticles({})
+      .then(articles => {
+        this.setState({ totalPosts: articles.length })
+      });
+  }
+
+  pagination = (pageNumber) => {
+    this.setState({ currentPage: pageNumber })
+  }
+
   render() {
-    console.log("render")
+
     const { err } = this.state;
     if (this.state.isLoading) return <Loader />;
     else if (err) return <ErrorPage err={err} />;
@@ -68,6 +81,7 @@ class ArticleList extends Component {
 
       const { articles, sort_by, order } = this.state;
       const { slug } = this.props.match.params;
+
       return (
         <section id="articles">
           <div className="card mt-4">

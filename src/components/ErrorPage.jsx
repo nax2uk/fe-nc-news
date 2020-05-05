@@ -1,10 +1,33 @@
 import React from 'react';
+import './ErrorPage.css'
 
 const ErrorPage = (props) => {
+  let status = 404;
+  let msg = "Path not found"
+  if (props.err) {
+    status = props.err.status;
+    msg = props.err.msg;
+  }
 
   return (
-    <div>
-      {props.status ? <p>{`${props.err.status}: ${props.err.msg}`}</p> : <p>404: Path not found</p>}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="error-template">
+            <h1>
+              Oops!</h1>
+            <h2>
+              {status}</h2>
+            <div class="error-details">
+              {msg}
+            </div>
+            <div class="error-actions">
+              <a href="/" class="btn btn-secondary btn-lg"><span class="glyphicon glyphicon-home"></span>Take Me Home </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
