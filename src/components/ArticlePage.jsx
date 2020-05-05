@@ -16,7 +16,7 @@ class ArticlePage extends Component {
   }
 
   togglePostCommentClick = () => {
-    console.log('clicked')
+
     this.setState(currState => {
       return { postCommentIsClicked: !currState.postCommentIsClicked }
     })
@@ -27,7 +27,9 @@ class ArticlePage extends Component {
       .postComment(article_id, username, body)
       .then((comment) => {
         this.setState(currState => {
-          return { comments: [comment, ...currState.comments], postCommentIsClicked: false }
+          const newArticle = { ...currState.article };
+          newArticle.comment_count = currState.article.comment_count++;
+          return { comments: [comment, ...currState.comments], article: newArticle, postCommentIsClicked: false }
         })
       })
 
@@ -38,7 +40,9 @@ class ArticlePage extends Component {
       .deleteComment(comment_id)
       .then(() => {
         this.setState(currState => {
-          return { comments: currState.comments.filter(comment => comment.comment_id !== comment_id) }
+          const newArticle = { ...currState.article };
+          newArticle.comment_count = currState.article.comment_count--;
+          return { comments: currState.comments.filter(comment => comment.comment_id !== comment_id), article: newArticle }
         })
       })
   }
@@ -57,7 +61,6 @@ class ArticlePage extends Component {
       })
   }
 
-
   render() {
     const { username } = this.props;
     if (this.state.isLoading) return <Loader />;
@@ -67,21 +70,21 @@ class ArticlePage extends Component {
       return (<div className="card mt-4">
 
         <div className="card-body">
+
           <h5 className="card-title">{`${article.title}`}</h5>
 
-          <p className="text-capitalize card-subtitle text-muted small">in <Link to={`/topic/${article.topic}`}>{`${article.topic}`}</Link>
-            <span className="card-subtitle text-muted"> {`᛫ Posted by ${article.author} on ${article.created_at}`}</span>
+          <p className="text-capitalize card-subtitle text-muted small mx-1 mt-0 text-left">in <Link to={`/topic/${article.topic}`}>{`${article.topic}`}</Link>
+            <span className="card-subtitle text-muted"> {`᛫ Posted by ${article.author} on ${new Date(article.created_at).toDateString()}`}</span>
           </p>
 
-          <p className="card-text mx-2 my-2">{`${article.body}`}</p>
+          <p className="card-text mx-4 my-2">{`${article.body}`}</p>
 
-          <div className="small">
-            <VoteUpdater article={article} />
-            <span className="votes"><i className="icon fas fa-comment-alt ml-3"></i> {`${article.comment_count} comments`} </span>
-
+          <div className="small mb-0 ml-4 float-left">
+            <span className="votes ml-2"><i className="icon fas fa-comment-alt ml-3"></i> {`${article.comment_count} comments`} </span>
+            <span className="ml-2"><VoteUpdater id={article.article_id} dir="articles" votes={article.votes} /></span>
           </div>
+          <button type="button" className="btn btn-secondary custom-btn btn-sm small float-right  mr-5 mt-1" onClick={this.togglePostCommentClick}>Post Comment</button>
 
-          <button type="button" className="btn btn-secondary btn-sm small ml-2 my-2" onClick={this.togglePostCommentClick}>Post Comment</button>
           {postCommentIsClicked && <PostCommentForm username={username} article_id={article.article_id} addComment={this.addComment} />}
         </div>
 

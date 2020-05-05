@@ -3,7 +3,6 @@ import * as api from '../utils/api'
 import Loader from './Loader'
 import SortForm from './SortForm'
 import ArticleCard from './ArticleCard'
-import './ArticleList.css'
 
 
 class ArticleList extends Component {

@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import * as api from '../utils/api'
 
 class VoteUpdater extends Component {
-  state = { voteDifference: 0 }
+  state = { voteDifference: 0, voted: false }
 
   updateVote(voteChange) {
     this.setState(currState => {
-      return { voteDifference: currState.voteDifference + voteChange }
+      return { voteDifference: currState.voteDifference + voteChange, voted: true }
     })
 
-    const { article_id } = this.props.article;
-    api.updateArticleVotes(article_id, voteChange).catch(() => {
+    const { dir, id } = this.props;
+    api.updateVoteByDir(dir, id, voteChange).catch(() => {
       this.setState(currState => {
         return { voteDifference: currState.voteDifference - voteChange }
       })
@@ -18,16 +18,16 @@ class VoteUpdater extends Component {
   }
 
   render() {
-    const { votes } = this.props.article;
+    const { votes } = this.props;
     const { voteDifference } = this.state;
     return (
       <React.Fragment>
         <span className="votes"><i className="icon fas fa-vote-yea"></i> {`${votes + voteDifference} votes`}</span>
 
-        <button type="button" className="btn btn-light px-1" onClick={() => { this.updateVote(1) }}>
+        <button type="button" className="btn btn-light px-1" onClick={() => { this.updateVote(1) }} disabled={voteDifference === 1}>
           <i className="icon far fa-thumbs-up"></i>
         </button>
-        <button type="button" className="btn btn-light px-0" onClick={() => { this.updateVote(-1) }}>
+        <button type="button" className="btn btn-light px-0" onClick={() => { this.updateVote(-1) }} disabled={voteDifference === -1}>
           <i className="icon far fa-thumbs-down"></i>
         </button>
       </React.Fragment>

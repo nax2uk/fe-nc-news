@@ -23,8 +23,8 @@ class PostCommentForm extends Component {
       {
         (username === "") ? <p className="ml-2">You can't post a comment because you are not logged in.</p> :
           <form>
-            <div className="form-group container-fluid">
-              <label>{`Post Comment as ${username}`} </label>
+            <div className="form-group container-fluid mt-5">
+              <label class="small">{`Post Comment as ${username}`} </label>
               <textarea className="form-control" rows="3" onChange={this.handleChange} value={body}></textarea>
               <div className="text-right">
                 <button className="btn btn-outline-secondary btn-sm small ml-2 mt-2" onClick={this.submitComment}>Comment</button>

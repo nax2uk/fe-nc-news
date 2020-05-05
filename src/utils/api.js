@@ -67,11 +67,12 @@ export const getUser = (user) => {
     })
 }
 
-export const updateArticleVotes = (article_id, voteChange) => {
+export const updateVoteByDir = (dir, id, voteChange) => {
 
   return axios
-    .patch(`https://nc--news-server.herokuapp.com/api/articles/${article_id}`, { inc_votes: voteChange })
+    .patch(`https://nc--news-server.herokuapp.com/api/${dir}/${id}`, { inc_votes: voteChange })
 }
+
 
 export const postComment = (article_id, username, body) => {
   return axios
