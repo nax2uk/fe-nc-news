@@ -28,9 +28,9 @@ class PostCommentForm extends Component {
           <form>
             <div className="form-group container-fluid mt-5">
               <label className="small">{`Post Comment as ${username}`} </label>
-              <textarea className="form-control" rows="3" onChange={this.handleChange} value={body} placeholder="Your comment goes here." />
+              <textarea className="form-control" rows="3" onChange={this.handleChange} value={body} placeholder="Your comment goes here. Comment button is greyed out until you enter some comments." />
               <div className="text-right">
-                <button className="btn btn-outline-secondary btn-sm small ml-2 mt-2" onClick={this.submitComment} disabled={isNotFilled} > Comment</button>
+                <button className="btn btn-outline-secondary btn-sm cursor-pointer small ml-2 mt-2" onClick={this.submitComment} disabled={isNotFilled} > Comment</button>
               </div>
             </div>
           </form> : <p className="mt-3 ml-4">You can't post a comment because you are not logged in.</p>
