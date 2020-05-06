@@ -3,11 +3,11 @@ import React from 'react';
 const SortForm = (props) => {
 
   const onChange = (event) => {
-    const { sortArticles, topic, sort_by, order } = props;
+    const { sortArticles, topic, sort_by } = props;
     const { name, value } = event.target;
     console.log(name);
     if (name === "sort_by")
-      sortArticles({ sort_by: value, topic, order: order });
+      sortArticles({ sort_by: value, topic, order: "desc" });
     else sortArticles({ sort_by: sort_by, topic, order: value });
   }
 

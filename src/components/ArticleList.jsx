@@ -22,17 +22,13 @@ class ArticleList extends Component {
 
     if (this.props.match.path === '/') this.fetchArticles({ sort_by: "votes", limit: 5 })
     else if (this.props.match.params.slug) {
-      const { currentPage, articlesPerPage } = this.state;
+      const { articlesPerPage, currentPage } = this.state;
       this.fetchArticles({ topic: this.props.match.params.slug, limit: articlesPerPage, p: currentPage })
 
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps)
-    console.log(this.props)
-    console.log(prevState)
-    console.log(this.state)
     const { articlesPerPage, currentPage } = this.state;
 
     if (prevProps.match.params.slug !== this.props.match.params.slug) {
@@ -43,10 +39,12 @@ class ArticleList extends Component {
         this.fetchArticles({ sort_by: "votes", limit: 5, p: 1 });
       }
     }
-    else if (prevState.currentPage !== this.state.currentPage) {
+    else if (prevState.currentPage !== currentPage) {
       this.fetchArticles({ topic: this.props.match.params.slug, limit: articlesPerPage, p: currentPage })
     }
   }
+
+
 
   fetchArticles = (params) => {
     api
