@@ -16,7 +16,7 @@ const ArticleCardList = (props) => {
                 <span className="card-subtitle text-muted"> {`᛫ Posted by ${article.author} on ${new Date(article.created_at).toDateString()}`}</span>
               </p>
               <div className="small">
-                <VoteUpdater id={article.article_id} dir="article" votes={article.votes} />
+                <VoteUpdater id={article.article_id} dir="articles" votes={article.votes} />
                 <button type="button" className="btn btn-light">
                   <i className="icon fas fa-comment-alt"></i><a href={`/articles/${article.article_id}`} className="small"> {`${article.comment_count} comments`} </a>
                 </button>

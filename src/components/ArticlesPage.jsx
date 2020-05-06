@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api'
 import Loader from './Loader'
 import SortForm from './forms/SortForm'
-import ArticleCard from './ArticleCardList'
+import ArticleCardList from './ArticleCardList'
 import ErrorPage from './ErrorPage'
 import PageNav from './bottomNavs/PageNav'
 
@@ -21,49 +21,49 @@ class ArticlesPage extends Component {
   componentDidMount() {
 
     if (this.props.match.path === '/') {
-      this.setState({ sort_by: "votes",order:"desc", limit: 5, p:1 },()=>{
+      this.setState({ sort_by: "votes", order: "desc", limit: 5, p: 1 }, () => {
         this.fetchArticles();
       })
-     
+
     }
     else if (this.props.match.params.slug) {
-      this.setState({sort_by:"created_at",order:"desc", limit:4,p:1},()=>{
+      this.setState({ sort_by: "created_at", order: "desc", limit: 4, p: 1 }, () => {
         this.fetchArticles();
       });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-   
-    const changedToHomePage = (this.props.match.path==='/')
-    const urlHasChanged = (prevProps.match.url!==this.props.match.url);
+
+    const changedToHomePage = (this.props.match.path === '/')
+    const urlHasChanged = (prevProps.match.url !== this.props.match.url);
 
     if (urlHasChanged) {
-      if (changedToHomePage){
-        this.setState({sort_by:"created_at", order:"desc", currentPage:1, limit:5},()=>{
-        this.fetchArticles();
+      if (changedToHomePage) {
+        this.setState({ sort_by: "created_at", order: "desc", currentPage: 1, limit: 5 }, () => {
+          this.fetchArticles();
         });
       }
       else if (this.props.match.params.slug) {
         // reset sort form and currentPage
-        this.setState({sort_by:"created_at", order:"desc", currentPage:1, limit:4},()=>{
+        this.setState({ sort_by: "created_at", order: "desc", currentPage: 1, limit: 4 }, () => {
           this.fetchArticles();
         });
       }
     }
-    else if (prevState.currentPage!==this.state.currentPage){
+    else if (prevState.currentPage !== this.state.currentPage) {
       this.fetchArticles();
     }
   }
-   
+
 
 
 
   fetchArticles = () => {
-    const{sort_by, order, limit, currentPage} =this.state;
-    const topic =this.props.match.params.slug;
+    const { sort_by, order, limit, currentPage } = this.state;
+    const topic = this.props.match.params.slug;
     api
-      .getArticles({topic:topic, sort_by:sort_by, order:order, limit:limit, p:currentPage})
+      .getArticles({ topic: topic, sort_by: sort_by, order: order, limit: limit, p: currentPage })
       .then(({ articles, articles_count }) => {
         this.setState({
           articles: articles,
@@ -76,11 +76,11 @@ class ArticlesPage extends Component {
       })
   }
 
-  sortArticles = ({sort_by,order}) => {
-   
-    this.setState({sort_by:sort_by, order:order,isLoading:true}, ()=>{
+  sortArticles = ({ sort_by, order }) => {
+
+    this.setState({ sort_by: sort_by, order: order, isLoading: true }, () => {
       this.fetchArticles()
-    }) 
+    })
   }
 
   paginate = (pageNumber) => {
@@ -104,12 +104,12 @@ class ArticlesPage extends Component {
               {slug ?
                 <React.Fragment>
                   <h4 className="float-left pl-2 pt-1">{`${slug}`}</h4>
-                  <span className="float-right"><SortForm sortArticles={this.sortArticles} topic={slug} sort_by={sort_by} order={order} /></span>
+                  <SortForm sortArticles={this.sortArticles} sort_by={sort_by} order={order} />
                 </React.Fragment>
                 : <h4 className="float-left pl-2 pt-1">Top 5 Recently Posted Articles</h4>}
             </div>
           </div>
-          <ArticleCard articles={articles} />
+          <ArticleCardList articles={articles} />
           {(this.props.match.path !== '/') && <PageNav totalArticles={totalArticles} articlesPerPage={limit} currentPage={currentPage} paginate={this.paginate} />}
         </section>);
     }

@@ -3,6 +3,10 @@
   padding-left: 3%;
 }
 
+button:hover{
+  background-color: #E4E8EB
+}
+
 .btn-secondary.custom-btn {
 	background-color: #888888;
   border-color: #888888;
@@ -13,6 +17,11 @@
   border-color: #676767;
   outline:none;
 }
+.cursor-pointer{
+  cursor: context-menu;
+}
+
+
 
 .custom-select{
   width:150px;;

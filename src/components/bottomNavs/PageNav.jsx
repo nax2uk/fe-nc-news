@@ -8,20 +8,16 @@ const PageNav = (props) => {
   for (let i = 1; i <= Math.ceil(totalArticles / articlesPerPage); i++) pageNumbers.push(i);
 
   return (
-    <nav className="mr-2">
-      <ul className="pagination justify-content-end">
+    <nav class="btn-toolbar mb-3 justify-content-end">
+      <div class="btn-group mr-2">
         {pageNumbers.map(number => {
           return (
             (currentPage === number) ?
-              <li key={number} className="page-item disabled">
-                <a className="page-link" href="#!" tabIndex="-1" onClick={() => paginate(number)}>{number}</a>
-              </li>
-              : <li key={number} className="page-item" >
-                <a className="page-link" href="#!" onClick={() => paginate(number)}>{number}</a>
-              </li>
+              <button type="button" class="btn border btn-light cursor-pointer" disabled>{number}</button>
+              : <button type="button" class="btn border text-primary" onClick={() => paginate(number)}>{number}</button>
           );
         })}
-      </ul>
+      </div>
     </nav>
   );
 };
