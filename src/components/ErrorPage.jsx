@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import './css/ErrorPage.css'
 
 const ErrorPage = (props) => {
@@ -11,19 +12,19 @@ const ErrorPage = (props) => {
 
   return (
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="error-template">
-            <h1>
-              Oops!</h1>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="error-template">
             <h2>
-              {status}</h2>
-            <div class="error-details">
+              Oops!</h2>
+            <h3>
+              {status}</h3>
+            <div className="error-details">
               {msg}
             </div>
-            <div class="error-actions">
-              <a href="/" class="btn btn-secondary btn-lg"><span class="glyphicon glyphicon-home"></span>Take Me Home </a>
+            <div className="error-actions">
+              <Link to="/" className="btn btn-secondary btn-lg"><span className="glyphicon glyphicon-home"></span>Take Me Home </Link>
             </div>
           </div>
         </div>
