@@ -89,7 +89,7 @@ class SingleArticlePage extends Component {
 
       return (<div className="card mt-4">
 
-        <div className="card-body">
+        <div className="card-body border-bottom">
 
           <h5 className="card-title">{`${article.title}`}</h5>
 
@@ -103,7 +103,7 @@ class SingleArticlePage extends Component {
             <span className="votes ml-2"><i className="icon fas fa-comment-alt ml-3"></i> {`${article.comment_count} comments`} </span>
             <span className="ml-2"><VoteUpdater id={article.article_id} dir="articles" votes={article.votes} /></span>
           </div>
-          <button type="button" className="btn btn-secondary custom-btn btn-sm small ml-3 mt-1" onClick={this.togglePostCommentClick}>Post Comment</button>
+          <button type="button" className="btn btn-secondary custom-btn btn-sm small ml-3 mt-1 mb-3" onClick={this.togglePostCommentClick}>Post Comment</button>
 
           {postCommentIsClicked && <PostCommentForm username={username} article_id={article.article_id} addComment={this.addComment} />}
         </div>

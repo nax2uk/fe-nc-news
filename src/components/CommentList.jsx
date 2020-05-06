@@ -12,7 +12,7 @@ const CommentList = (props) => {
 
   return (
     <ul className="list-group list-group-flush">
-      <li className="list-group-item"> </li>
+
       {comments.map(comment => {
         return (
           <li key={`${comment.comment_id}`} className="list-group-item">
