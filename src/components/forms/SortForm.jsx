@@ -13,7 +13,7 @@ const SortForm = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <form>
       <label className="mr-2">Sort : </label>
       <select className="custom-select my-1 mr-sm-2 custom-select-sm" name="sort_by" value={sort_by} onChange={onChange}>
         <option value="created_at">Date Added</option>
@@ -24,7 +24,7 @@ const SortForm = (props) => {
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
       </select>
-    </React.Fragment>
+    </form>
   );
 };
 
