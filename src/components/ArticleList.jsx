@@ -29,14 +29,16 @@ class ArticleList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+    console.log(prevProps)
+    console.log(this.props)
+    console.log(prevState)
+    console.log(this.state)
     const { articlesPerPage, currentPage } = this.state;
-    if (prevProps.match.params.slug !== this.props.match.params.slug) {
 
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
       this.fetchArticles({ topic: this.props.match.params.slug, limit: articlesPerPage, p: 1 });
     }
-
-    if (prevProps.match.path !== this.props.match.path) {
+    else if (prevProps.match.path !== this.props.match.path) {
       if (this.props.match.path === "/") {
         this.fetchArticles({ sort_by: "votes", limit: 5, p: 1 });
       }
@@ -44,20 +46,20 @@ class ArticleList extends Component {
     else if (prevState.currentPage !== this.state.currentPage) {
       this.fetchArticles({ topic: this.props.match.params.slug, limit: articlesPerPage, p: currentPage })
     }
-
-
   }
 
   fetchArticles = (params) => {
     api
       .getArticles(params)
       .then(({ articles, articles_count }) => {
+        const { p } = params;
         this.setState({
           sort_by: "created_at",
           order: "desc",
           articles: articles,
           isLoading: false,
-          totalArticles: articles_count
+          totalArticles: articles_count,
+          currentPage: p
         })
       })
       .catch(err => {
@@ -92,7 +94,7 @@ class ArticleList extends Component {
     else if (err) return <ErrorPage err={err} />;
     else {
 
-      const { articles, sort_by, order, totalArticles, articlesPerPage } = this.state;
+      const { articles, sort_by, order, totalArticles, articlesPerPage, currentPage } = this.state;
       const { slug } = this.props.match.params;
 
       return (
@@ -108,7 +110,7 @@ class ArticleList extends Component {
             </div>
           </div>
           <ArticleCard articles={articles} />
-          {(this.props.match.path !== '/') && <PageNav totalArticles={totalArticles} articlesPerPage={articlesPerPage} paginate={this.paginate} />}
+          {(this.props.match.path !== '/') && <PageNav totalArticles={totalArticles} articlesPerPage={articlesPerPage} currentPage={currentPage} paginate={this.paginate} />}
         </section>);
     }
   }
