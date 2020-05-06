@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import NavMenu from './components/NavMenu'
-import Footer from './components/Footer'
-import Dashboard from './components/Dashboard'
-import ArticleList from './components/ArticleList'
-import ArticlePage from './components/ArticlePage'
+import NavMenu from './components/topNavs/NavMenu'
+import Footer from './components/bottomNavs/Footer'
+import Dashboard from './components/topNavs/Dashboard'
+import ArticlesPage from './components/ArticlesPage'
+import SingleArticlePage from './components/SingleArticlePage'
 import ErrorPage from './components/ErrorPage'
 import * as api from './utils/api'
 import './App.css';
@@ -38,9 +38,9 @@ class App extends Component {
         <NavMenu />
         <Dashboard name={name} avatar_url={avatar_url} username={username} />
         <Switch>
-          <Route path='/' exact component={ArticleList} />
-          <Route path='/topic/:slug' exact component={ArticleList} />
-          <Route path='/articles/:article_id' exact render={(props) => <ArticlePage {...props} username={username} />} />
+          <Route path='/' exact component={ArticlesPage} />
+          <Route path='/topic/:slug' exact component={ArticlesPage} />
+          <Route path='/articles/:article_id' exact render={(props) => <SingleArticlePage {...props} username={username} />} />
           <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer />

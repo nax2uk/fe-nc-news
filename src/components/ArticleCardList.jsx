@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import VoteUpdater from './VoteUpdater'
 
-const ArticleCard = (props) => {
+const ArticleCardList = (props) => {
   const { articles } = props;
   return (
     <div className="card">
@@ -28,4 +28,4 @@ const ArticleCard = (props) => {
   );
 };
 
-export default ArticleCard;
+export default ArticleCardList;

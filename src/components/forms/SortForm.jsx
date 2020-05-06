@@ -1,15 +1,15 @@
 import React from 'react';
 
 const SortForm = (props) => {
-  const { sortArticles, topic, sort_by, order } = props;
+  const { sortArticles, sort_by, order } = props;
 
   const onChange = (event) => {
 
     const { name, value } = event.target;
 
     if (name === "sort_by")
-      sortArticles({ sort_by: value, topic, order: "desc" });
-    else sortArticles({ sort_by: sort_by, topic, order: value });
+      sortArticles({ sort_by: value, order: "desc" });
+    else sortArticles({ sort_by: sort_by, order: value });
   }
 
   return (

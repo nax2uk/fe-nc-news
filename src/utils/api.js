@@ -8,11 +8,12 @@ export const getTopics = () => {
     })
 }
 
-export const getArticles = ({ sort_by, topic, limit, p }) => {
+export const getArticles = ({ sort_by,order, topic, limit, p }) => {
   return axios
     .get('https://nc--news-server.herokuapp.com/api/articles', {
       params: {
         sort_by: sort_by,
+        order:order,
         topic: topic,
         limit: limit,
         p: p

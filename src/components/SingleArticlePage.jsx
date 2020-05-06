@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import CommentList from './CommentList'
 import VoteUpdater from './VoteUpdater'
-import PostCommentForm from './PostCommentForm'
+import PostCommentForm from './forms/PostCommentForm'
 import ErrorPage from './ErrorPage'
 import Loader from './Loader'
 import * as api from '../utils/api'
 
 
-class ArticlePage extends Component {
+class SingleArticlePage extends Component {
   state = {
     article: {},
     comments: [],
@@ -116,4 +116,4 @@ class ArticlePage extends Component {
   }
 }
 
-export default ArticlePage;
+export default SingleArticlePage;
