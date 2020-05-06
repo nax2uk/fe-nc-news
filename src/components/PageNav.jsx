@@ -2,10 +2,10 @@ import React from 'react';
 
 
 const PageNav = (props) => {
-  const { postsPerPage, paginate, totalPosts } = props
+  const { articlesPerPage, paginate, totalArticles } = props
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) pageNumbers.push(i);
+  for (let i = 1; i <= Math.ceil(totalArticles / articlesPerPage); i++) pageNumbers.push(i);
 
   return (
     <nav className="mr-2">
@@ -13,7 +13,7 @@ const PageNav = (props) => {
         {pageNumbers.map(number => {
           return (
             <li key={number} className="page-item">
-              <a className="page-link" href={`/articles/p/${number}`} onClick={() => paginate(number)}>{number}</a>
+              <a className="page-link" href="#!" onClick={() => paginate(number)}>{number}</a>
             </li>
           );
         })}

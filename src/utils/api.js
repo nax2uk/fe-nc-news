@@ -8,17 +8,18 @@ export const getTopics = () => {
     })
 }
 
-export const getArticles = ({ sort_by, topic, limit }) => {
+export const getArticles = ({ sort_by, topic, limit, p }) => {
   return axios
     .get('https://nc--news-server.herokuapp.com/api/articles', {
       params: {
         sort_by: sort_by,
         topic: topic,
-        limit: limit
+        limit: limit,
+        p: p
       }
     })
-    .then(({ data: { articles } }) => {
-      return articles;
+    .then(({ data: { articles, articles_count } }) => {
+      return { articles: articles, articles_count: articles_count };
     })
 
 }
@@ -50,11 +51,6 @@ export const getSortedArticles = ({ sort_by, order, topic }) => {
       }
     })
     .then(({ data: { articles } }) => {
-      console.log({
-        sort_by: sort_by,
-        order: order,
-        topic: topic
-      })
       return articles;
     })
 
@@ -82,7 +78,6 @@ export const postComment = (article_id, username, body) => {
       body: body
     })
     .then(({ data: { comment } }) => {
-      console.log(comment)
       return comment;
     })
 }
