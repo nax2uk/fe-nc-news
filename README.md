@@ -1,45 +1,61 @@
-# React Project Checklist
+# nc--news-server (Front-End)
 
-Here's a guide to approaching any React project. It's not an absolutely strict set of rules, but you can use it to help you avoid getting distracted by things that are likely to be a waste of time if done too early.
+Northcoders News is a social news aggregation, web content rating, and discussion website.
 
-## Planning
-- Copy this list into your project
-- Outline functionality of your app
-- Draw main views of app
-- Break out components from your views
-- Name your components
-- Draw component hierarchy
-- Plan routing
-- Label where you will require functions that change state
-- Label where you will require data
-- Determine from this where you will require state & hold functions
+Northcoders News has articles which are divided into topics. 
+Each article has user curated ratings and can be up or down voted using the API. 
+Users can also add comments about an article. 
+Comments can also be up or down voted. 
+A user can add comments and remove any comments which they have added.
 
-## Setup
-- Create your app directory (e.g. with create-react-app)
-- Run your app
-- Git init (unless cloned!), gitignore config, make an initial commit
-- Ensure you have React DevTools running
+Data is fetched using a RESTful API which has also been built by me. (See Links)
 
-## Static
-- Make blank components (functional or class?) as per your plan
-- Create reuasable components e.g. buttons, inputs
-- Export and import components as per your hierarchy
-- Check everything is hooked up
-    - you may want to add positional styling here to match your planned layout. DO NOT do any cosmetic styling yet!
-- Write static render methods with mock data
-- Add expected propTypes (adapt this as necessary)
+## Links
+You can find the api hosted [here](https://nc-student-tracker.herokuapp.com)
+You can find the api repository [here](https://github.com/nax2uk/be-nc-news.git)
+You can find the front-end react app deployed [here](https://northcoders-news-website.netlify.app/)
 
-## Dynamic (order may be a bit looser here!)
-- Create .api file
-- Construct componentDidMount functions
-- Create functions that setState
-- Add expected props to component instantiation
-- Add mapping / looping for creating multiple components
-- Deal with component lifecycle issues, e.g. making new api calls on componentDidUpdate
-- Add event handlers
+## Getting Started
 
-## Style
-- Add classNames
-- Create and .css files
-- Write application CSS - sitewide styling choices like fonts, colour pallettes
-- Write component specific CSS
+These instructions will get you a copy of the project up and running on your local machine for development.
+
+### Prerequisites
+
+Download and install 
+
+ node minimum version 13.9.0 [node](https://nodejs.org/en/download/)
+
+
+### Installing
+
+Clone this repo:
+
+```bash
+git clone https://github.com/northcoders/be-nc-news
+
+cd fe-nc-news
+
+```
+
+Install required packages and dependencies
+```bash
+npm install
+```
+
+Start northcoders-news app
+```bash
+npm start
+```
+
+## Built With
+
+* [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+* [Bootstrap](https://getbootstrap.com/) - The world’s most popular front-end component library.
+* [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom) - The standard routing library for React.
+
+
+## Authors
+
+* **Azlina Yeo** - *Initial work* - [nax2uk](https://github.com/nax2uk)
+
