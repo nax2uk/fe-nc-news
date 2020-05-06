@@ -41,7 +41,6 @@ class App extends Component {
           <Route path='/' exact component={ArticleList} />
           <Route path='/topic/:slug' exact component={ArticleList} />
           <Route path='/articles/:article_id' exact render={(props) => <ArticlePage {...props} username={username} />} />
-          <Route path='/articles/p/:page_num' exact component={ArticleList} />
           <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer />
