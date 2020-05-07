@@ -31,7 +31,7 @@ Download and install
 Clone this repo:
 
 ```bash
-git clone https://github.com/northcoders/be-nc-news
+git clone https://github.com/northcoders/fe-nc-news
 
 cd fe-nc-news
 
