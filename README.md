@@ -1,4 +1,4 @@
-# nc--news-server (Front-End)
+# Northcoders News Server (Front-End)
 
 Northcoders News is a social news aggregation, web content rating, and discussion website.
 
