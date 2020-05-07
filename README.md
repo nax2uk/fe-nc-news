@@ -11,7 +11,7 @@ A user can add comments and remove any comments which they have added.
 Data is fetched using a RESTful API which has also been built by me. (See Links)
 
 ## Links
-* You can find the api hosted [here](https://nc-student-tracker.herokuapp.com).
+* You can find the api hosted [here](https://nc--news-server.herokuapp.com/api).
 * You can find the api repository [here](https://github.com/nax2uk/be-nc-news.git).
 * You can find the front-end react app deployed [here](https://northcoders-news-website.netlify.app/).
 
