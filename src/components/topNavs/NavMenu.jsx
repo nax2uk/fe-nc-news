@@ -16,8 +16,8 @@ class NavMenu extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark">
-        <Link to='/' className="navbar-brand">Northcoders News</Link>
+      <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark  my-0 py-0" >
+        <h1><Link to='/' className="navbar-brand">Northcoders News</Link></h1>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerMenu"
           aria-controls="navbarTogglerMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ class NavMenu extends Component {
             }
           </ul>
         </div>
-      </nav >
+      </nav>
     );
   }
 }
