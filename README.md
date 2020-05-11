@@ -1,6 +1,6 @@
 # Northcoders News Server (Front-End)
 
-Northcoders News is a social news aggregation, web content rating, and discussion website.
+Northcoders News is a social news aggregation, web content rating, and discussion website which as been created using React.js.
 
 Northcoders News has articles which are divided into topics. 
 Each article has user curated ratings and can be up or down voted using the API. 
@@ -9,6 +9,12 @@ Comments can also be up or down voted.
 A user can add comments and remove any comments which they have added.
 
 Data is fetched using a RESTful API which has also been built by me. (See Links)
+
+
+## Links
+* You can find the api hosted [here](https://nc--news-server.herokuapp.com/api).
+* You can find the api repository [here](https://github.com/nax2uk/be-nc-news.git).
+* You can find the front-end react app deployed [here](https://northcoders-news-website.netlify.app/).
 
 ## Getting Started
 
@@ -41,11 +47,6 @@ Start northcoders-news app
 ```bash
 npm start
 ```
-
-## Links
-* You can find the api hosted [here](https://nc--news-server.herokuapp.com/api).
-* You can find the api repository [here](https://github.com/nax2uk/be-nc-news.git).
-* You can find the front-end react app deployed [here](https://northcoders-news-website.netlify.app/).
 
 ## Built With
 
