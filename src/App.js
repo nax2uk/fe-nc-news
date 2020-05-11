@@ -37,17 +37,18 @@ class App extends Component {
       <BrowserRouter>
         <NavMenu />
         <Dashboard name={name} avatar_url={avatar_url} username={username} />
-        <Switch>
-          <Route path='/' exact component={ArticlesPage} />
-          <Route path='/topic/:slug' exact component={ArticlesPage} />
-          <Route path='/articles/:article_id' exact render={(props) => <SingleArticlePage {...props} username={username} />} />
-          <Route path="*" component={ErrorPage} />
-        </Switch>
+        <main>
+          <Switch>
+            <Route exact path='/' component={ArticlesPage} />
+            <Route exact path='/topic/:slug' component={ArticlesPage} />
+            <Route exact path='/articles/:article_id' render={(props) => <SingleArticlePage {...props} username={username} />} />
+            <Route path="*" component={ErrorPage} />
+          </Switch>
+        </main>
         <Footer />
       </BrowserRouter>
     );
   }
-
 }
 
 export default App;

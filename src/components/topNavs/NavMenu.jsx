@@ -35,7 +35,7 @@ class NavMenu extends Component {
             }
           </ul>
         </div>
-      </nav>
+      </nav >
     );
   }
 }
