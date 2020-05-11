@@ -27,9 +27,9 @@ class PostCommentForm extends Component {
         (username) ?
           <form>
             <div className="form-group container-fluid mt-5">
-              <label className="small">{`Post Comment as ${username}`}
-                <textarea className="form-control" rows="3" onChange={this.handleChange} value={body} placeholder="Please write a comment before submitting." />
-              </label>
+              <label for="comments" className="small">{`Post Comment as ${username}`}</label>
+              <textarea id="comments" className="form-control" rows="3" onChange={this.handleChange} value={body} placeholder="Please write a comment before submitting." />
+
               <div className="text-right">
                 <button className="btn btn-outline-secondary btn-sm cursor-pointer small ml-2 mt-2" onClick={this.submitComment} disabled={isNotFilled} > Comment</button>
               </div>

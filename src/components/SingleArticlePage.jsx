@@ -63,6 +63,7 @@ class SingleArticlePage extends Component {
         this.setState({ comments: comments, isLoading: false })
       })
       .catch(err => {
+
         this.setState({ isLoading: false, err: { status: err.response.status, msg: err.response.data.msg } });
       })
 
