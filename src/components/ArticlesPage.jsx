@@ -19,7 +19,6 @@ class ArticlesPage extends Component {
   }
 
   componentDidMount() {
-
     if (this.props.match.path === '/') {
       this.setState({ sort_by: "votes", order: "desc", limit: 5, p: 1 }, () => {
         this.fetchArticles();
@@ -34,27 +33,15 @@ class ArticlesPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // cDU will be invoked after any render that isn't the first one
-    // render is invoked if: a) state has changed, or b) PROPS have changed
-
-    // did cDU get invoked because of PROPs or because of STATE.
-
-    // first render: 
-    // cDU: prevProps = "/coding", this.props = "/"
-
-    // second time
-    // ArticlesPage.componentDidUpdate(thisPropsFromLastTime, "/")
-
-    // cDU: prevProps = "/", this.props = "/"
 
     const changedToHomePage = (this.props.match.path === '/')
-    const urlHasChanged = (prevProps.match.url !== this.props.match.url); // FAIL second time (because state changed not props)
+    const urlHasChanged = (prevProps.match.url !== this.props.match.url);
     const changedToTopicPage = this.props.match.params.slug;
     const pageNumberHasChanged = (prevState.currentPage !== this.state.currentPage);
     const sort_byHasChanged = (prevState.sort_by !== this.state.sort_by);
     const orderHasChanged = (prevState.order !== this.state.order);
     const limitHasChanged = (prevState.limit !== this.state.limit);
-    const topicHasChanged = (prevProps.match.params.slug !== this.props.match.params.slug)
+
 
     if (urlHasChanged) {
       if (changedToHomePage) {
@@ -65,13 +52,10 @@ class ArticlesPage extends Component {
       else if (changedToTopicPage) {
         this.setState({
           sort_by: "created_at", order: "desc", currentPage: 1, limit: 4, isLoading: true
-        })
+        }, () => this.fetchArticles())
       }
     }
-    if (pageNumberHasChanged || sort_byHasChanged || orderHasChanged || limitHasChanged || topicHasChanged) {
-      // OR if sort_by has changed
-      // OR if order has changed
-      // OR if limit has changed
+    else if (pageNumberHasChanged || sort_byHasChanged || orderHasChanged || limitHasChanged) {
       this.fetchArticles();
     }
   }

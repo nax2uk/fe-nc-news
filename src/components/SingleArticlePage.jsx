@@ -30,7 +30,7 @@ class SingleArticlePage extends Component {
       .then((comment) => {
         this.setState(currState => {
           const newArticle = { ...currState.article };
-          newArticle.comment_count = currState.article.comment_count + 1;
+          newArticle.comment_count = parseInt(newArticle.comment_count) + 1;
           return { comments: [comment, ...currState.comments], article: newArticle, postCommentIsClicked: false }
         })
       })
@@ -46,7 +46,7 @@ class SingleArticlePage extends Component {
       .then(() => {
         this.setState(currState => {
           const newArticle = { ...currState.article };
-          newArticle.comment_count = currState.article.comment_count - 1;
+          newArticle.comment_count = parseInt(newArticle.comment_count) - 1;
           return { comments: currState.comments.filter(comment => comment.comment_id !== comment_id), article: newArticle }
         })
       })
