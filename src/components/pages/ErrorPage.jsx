@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './css/ErrorPage.css'
+import '../css/ErrorPage.css'
 
 const ErrorPage = (props) => {
   let status = 404;

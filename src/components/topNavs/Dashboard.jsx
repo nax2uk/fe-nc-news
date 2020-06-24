@@ -1,19 +1,23 @@
 import React from 'react';
+import LoginModal from '../modal/LoginModal';
+import UserDetails from '../UserDetails';
+
+import '../css/Dashboard.css';
 
 const Dashboard = (props) => {
 
-  const { username, avatar_url } = props;
-
   return (
-    <div className="nav-scroller bg-white shadow-sm">
+    <div id="dashboard" className="nav-scroller bg-white shadow-sm">
       <nav className="nav nav-underline justify-content-end">
-        <a href="/" className="nav-link nav-item text-info mr-4 ml-auto disabled">{username ?
-          <span className="badge badge-pill bg-light align-text-bottom">
-            <img alt={username} src={avatar_url} className="border border-dark mr-2" /> {username}</span> : <span>User not logged in</span>}</a>
+        <h5 className="text-info mr-4 ml-auto mt-1">{props.user.username ?
+          <UserDetails {...props} />
+          :
+          <LoginModal setUser={props.setUser} />}
+        </h5>
       </nav>
     </div>
   );
 
-}
+};
 
 export default Dashboard;

@@ -50,6 +50,14 @@ export const getUser = (user) => {
     })
 }
 
+export const getAllUsers = (comment_id) => {
+  return axios
+    .get(`https://nc--news-server.herokuapp.com/api/users`)
+    .then(({ data: { users } }) => {
+      return users;
+    })
+}
+
 export const updateVoteByDir = (dir, id, voteChange) => {
 
   return axios

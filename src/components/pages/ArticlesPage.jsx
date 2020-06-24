@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import * as api from '../utils/api'
-import Loader from './Loader'
-import SortForm from './forms/SortForm'
-import ArticleCardList from './ArticleCardList'
+import * as api from '../../utils/api'
+import Loader from '../Loader'
+import SortForm from '../forms/SortForm'
+import ArticleCardList from '../ArticleCardList'
 import ErrorPage from './ErrorPage'
-import PageNav from './bottomNavs/PageNav'
+import PageNav from '../bottomNavs/PageNav'
 
 class ArticlesPage extends Component {
   state = {

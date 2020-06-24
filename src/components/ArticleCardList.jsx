@@ -18,7 +18,8 @@ const ArticleCardList = (props) => {
               <div className="small">
                 <VoteUpdater id={article.article_id} dir="articles" votes={article.votes} />
                 <button type="button" className="btn btn-light">
-                  <i className="icon fas fa-comment-alt"></i><a href={`/articles/${article.article_id}`} className="small"> {`${article.comment_count} comments`} </a>
+                  <i className="icon fas fa-comment-alt"></i>
+                  <Link to={`/articles/${article.article_id}`} className="small"> {`${article.comment_count} comments`} </Link>
                 </button>
               </div>
             </li>);
