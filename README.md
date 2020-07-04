@@ -1,6 +1,6 @@
 # Northcoders News Server (Front-End)
 
-Northcoders News is a social news aggregation, web content rating, and discussion website which as been created using React.js.
+Northcoders News is a social news aggregation, web content rating, and discussion website which has been created using React.js.
 
 Northcoders News has articles which are divided into topics. 
 Each article has user curated ratings and can be up or down voted using the API. 
