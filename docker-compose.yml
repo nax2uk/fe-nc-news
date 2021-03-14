@@ -1,8 +1,6 @@
 version: '3.7'
-
 services:
-
-  fe-nc-news:
+fe-nc-news:
     container_name: fe-nc-news
     build:
       context: .
