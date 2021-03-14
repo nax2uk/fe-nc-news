@@ -35,4 +35,3 @@ jobs:
           docker-compose down
           docker-compose pull
           docker-compose up --build -d
-          sudo systemctl restart nginx
