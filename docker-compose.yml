@@ -1,9 +1,20 @@
-version: '3.7'
+version: "3.7"
+
 services:
-fe-nc-news:
-    container_name: fe-nc-news
+  
+  frontend:
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile
+    container_name: fe-nc-news
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
