@@ -17,7 +17,7 @@ class NavMenu extends Component {
     const { topics } = this.state;
     return (
       <nav className="navbar navbar-expand-md fixed-top bg-dark navbar-dark  my-0 py-0" >
-        <h1><Link to='/' className="navbar-brand">Northcoders News</Link></h1>
+        <h1><Link to='/' className="navbar-brand">NC News</Link></h1>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerMenu"
           aria-controls="navbarTogglerMenu" aria-expanded="false" aria-label="Toggle navigation">
